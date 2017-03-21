@@ -170,6 +170,8 @@ class Play
           {
             newHs = true;
           }
+          else
+          newHs = false;
         } else
           pause = true;
       }
