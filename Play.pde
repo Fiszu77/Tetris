@@ -196,7 +196,7 @@ class Play
         if (guPress.show(allButts))
         {
 
-          if (key == 'g' || key == 'G')
+          if (keyPressed && key == 'g' || key == 'G')
           {
             gameOver=true;
             pause=false;
