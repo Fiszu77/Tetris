@@ -33,11 +33,16 @@ void setup()
   {
     createWriter("data/settings.txt");
   }
-  //catch(ArrayIndex)
+  catch(ArrayIndexOutOfBoundsException u)
+  {
+    settings = new String[2];
+    settings[0] = "false";
+    settings[1] = "false";
+    saveStrings("data/settings.txt", settings);
+  }
   d = Desktop.getDesktop();
   size(540, 720);
   var=int(height/24);
-  print(var);
   frameRate(60);
   gButton = new Button(float(width)/2, 7*var, green, "Play");
   rButton = new Button(float(width)/2, 10*var, red, "Scores");
@@ -119,16 +124,12 @@ void draw()
     if (altRot == true)
     {
       fill(orange);
-      rectMode(CENTER);
-      rect(altRotButton.getX(), altRotButton.getY(), altRotButton.getWidth()-0.5*var, altRotButton.getHeight()-0.5*var);
-      rectMode(CORNER);
+      rect(altRotButton.getX()-var/4, altRotButton.getY()-var/4, altRotButton.getWidth()-0.5*var+1, altRotButton.getHeight()-0.5*var+1);
     }
     if (noShadow == false)
     {
       fill(purple);
-      rectMode(CENTER);
-      rect(shadowButton.getX(), shadowButton.getY(), shadowButton.getWidth()-0.5*var, shadowButton.getHeight()-0.5*var);
-      rectMode(CORNER);
+      rect(shadowButton.getX()-var/4, shadowButton.getY()-var/4, shadowButton.getWidth()-0.5*var+1, shadowButton.getHeight()-0.5*var+1);
     }
     fill(150);
     textFont(pixFont10);

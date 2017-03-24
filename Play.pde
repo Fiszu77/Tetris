@@ -54,7 +54,6 @@ class Play
         x=0;
         y++;
       }
-
       if (x==0||y==1||x%varInt==0||y%varInt==0)
         matrix.pixels[i]=color(0);
     }
