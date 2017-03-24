@@ -9,9 +9,6 @@ Button[] allButts;
 Hof hof;
 boolean prawo=false, lewo=false, szybko=false, obrotLewo = false, obrotPrawo = false, hardDrop = false, doKill = false, adb = false, newHs = false, pause = false, agdv =false;
 
-
-
-
 class Play
 {
   Blocks[] block = new Blocks[400];
@@ -169,9 +166,8 @@ class Play
           if (score>hof.highScore)
           {
             newHs = true;
-          }
-          else
-          newHs = false;
+          } else
+            newHs=false;
         } else
           pause = true;
       }

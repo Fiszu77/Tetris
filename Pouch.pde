@@ -5,7 +5,6 @@ class Pouch
   protected LinkedList<Integer> pouch = new LinkedList<Integer>();
   protected LinkedList<Integer> nextPouch = new LinkedList<Integer>();
   protected LinkedList<Integer> toDraw = new LinkedList<Integer>();
-  int amount = 0;
   Pouch()
   {
     newNextPouch();

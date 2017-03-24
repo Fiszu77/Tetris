@@ -22,11 +22,9 @@ class Screen extends Pouch
     {
       if (pouch.size() == 0)
       {
-        //println(nextPouch[0]+1);
         change(nextPouch.getFirst()+1);
       } else
       {
-        //println(pouch[amount]+1);
         change(pouch.getFirst()+1);
       }
       prev = pouch.size();

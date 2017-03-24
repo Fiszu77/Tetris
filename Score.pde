@@ -1,4 +1,3 @@
-Timer watch;
 public static int score = 0;
 class Score
 {
@@ -7,7 +6,6 @@ class Score
   int lvl = 1;
   Score()
   {
-    watch = new Timer();
   }
   void scoreFF()
   {
@@ -21,7 +19,6 @@ class Score
     case 1:
       score += 40*level;
       active[0]=true;
-      //watch.getTime();
       alpha=255;
       break;
     case 2:
@@ -36,7 +33,6 @@ class Score
       break;
     case 4:
       active[3]=true;
-      //watch.getTime();
       alpha=255;
       score += 1200*level;
       break;

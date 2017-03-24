@@ -12,27 +12,41 @@ PFont pixFont;
 PFont pixFont20;
 PFont pixFont10;
 PFont pixFontMX;
-Button gButton, rButton, bButton, linkButton, retButton, shadowButton;
+Button gButton, rButton, bButton, linkButton, retButton, shadowButton, altRotButton;
 Play play;
 Desktop d;
 Button[] allButtons;
 ScoreBoard scores;
 int mode = 0;
-public static boolean noShadow = false;
+public static boolean noShadow = false, altRot = false;
 public static float var =0;
+String settings[];
 void setup()
 { 
+  settings = loadStrings("settings.txt");
+  try 
+  {
+    noShadow = Boolean.parseBoolean(settings[0]);
+    altRot = Boolean.parseBoolean(settings[1]);
+  }
+  catch(NullPointerException e)
+  {
+    createWriter("data/settings.txt");
+  }
+  //catch(ArrayIndex)
   d = Desktop.getDesktop();
   size(540, 720);
-  var=int(height/24.5);
+  var=int(height/24);
+  print(var);
   frameRate(60);
   gButton = new Button(float(width)/2, 7*var, green, "Play");
   rButton = new Button(float(width)/2, 10*var, red, "Scores");
   bButton = new Button(float(width)/2, 13*var, blue, "Credits");
   linkButton = new Button(float(width)-var*2.45, float(height)-var*0.6, var*5.6, var*1.2, color(0), "");
   shadowButton = new Button(float(width)-var*4, var*10, var*1, var*1, color(255), "" );
+  altRotButton = new Button(float(width)-var*4, var*12, var*1, var*1, color(255), "" );
   retButton = new Button(float(width)/2, 18*var, yellow, "Menu");
-  allButtons = new Button[6];
+  allButtons = new Button[7];
   scores = new ScoreBoard();
   allButtons[0] = gButton;
   allButtons[1] = rButton;
@@ -40,6 +54,8 @@ void setup()
   allButtons[3] = linkButton; 
   allButtons[4] = retButton;
   allButtons[5] = shadowButton;
+  allButtons[6] = altRotButton;
+
   pixFont = createFont("Simpixle.ttf", 70);
   pixFont20 = createFont("Simpixle.ttf", 60);
   pixFont10 = createFont("Simpixle.ttf", 29);
@@ -77,6 +93,35 @@ void draw()
     if (shadowButton.show(allButtons))
     {
       noShadow = !noShadow;
+      try
+      {
+      settings[0] = String.valueOf(noShadow);
+      }
+      catch(NullPointerException e)
+      {
+        saveStrings("data/settings.txt", settings);
+      }
+      saveStrings("data/settings.txt", settings);
+    }
+    if (altRotButton.show(allButtons))
+    {
+      altRot = !altRot;
+      try
+      {
+      settings[1] = String.valueOf(altRot);
+      }
+      catch(NullPointerException e)
+      {
+        saveStrings("data/settings.txt", settings);
+      }
+      saveStrings("data/settings.txt", settings);
+    }
+    if (altRot == true)
+    {
+      fill(orange);
+      rectMode(CENTER);
+      rect(altRotButton.getX(), altRotButton.getY(), altRotButton.getWidth()-0.5*var, altRotButton.getHeight()-0.5*var);
+      rectMode(CORNER);
     }
     if (noShadow == false)
     {
@@ -88,6 +133,11 @@ void draw()
     fill(150);
     textFont(pixFont10);
     textAlign(RIGHT);
+    text("alt. rotations", width-0*var, 11.9*var);
+    if (altRot)
+      text("ON", width-2.2*var, 12.5*var);
+    else
+      text("OFF", width-2*var, 12.5*var);
     text("shadow", width-1.5*var, 9.9*var);
     if (noShadow)
       text("OFF", width-2*var, 10.5*var);

@@ -366,23 +366,47 @@ class Blocks
         }
       }
       if (numRot == 2)
-      {        
-        if (field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x, square[0].y+1) && field.isEmpty(square[0].x+1, square[0].y+1))
+      {  
+        if (altRot)
         {
-          square[1] = new Square(square[0].x-1, square[0].y, chosenOne);
-          square[2] = new Square(square[0].x, square[0].y+1, chosenOne);
-          square[3] = new Square(square[0].x+1, square[0].y+1, chosenOne);
-          return true;
+          if (field.isEmpty(square[0].x, square[0].y-1) && field.isEmpty(square[0].x-1, square[0].y-1) && field.isEmpty(square[0].x+1, square[0].y) )          
+          {
+            square[1] = new Square(square[0].x+1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x, square[0].y-1, chosenOne);
+            square[3] = new Square(square[0].x-1, square[0].y-1, chosenOne);
+            return true;
+          }
+        } else
+        {
+          if (field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x, square[0].y+1) && field.isEmpty(square[0].x+1, square[0].y+1))
+          {
+            square[1] = new Square(square[0].x-1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x, square[0].y+1, chosenOne);
+            square[3] = new Square(square[0].x+1, square[0].y+1, chosenOne);
+            return true;
+          }
         }
       }
       if (numRot == 3)
       {
-        if (field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x-1, square[0].y+1) && field.isEmpty(square[0].x, square[0].y-1)   )
+        if (altRot)
         {
-          square[1] = new Square(square[0].x-1, square[0].y, chosenOne);
-          square[2] = new Square(square[0].x-1, square[0].y+1, chosenOne);
-          square[3] = new Square(square[0].x, square[0].y-1, chosenOne);
-          return true;
+          if (field.isEmpty(square[0].x, square[0].y+1) && field.isEmpty(square[0].x+1, square[0].y-1) && field.isEmpty(square[0].x+1, square[0].y) )
+          {
+            square[1] = new Square(square[0].x+1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x, square[0].y+1, chosenOne);
+            square[3] = new Square(square[0].x+1, square[0].y-1, chosenOne);
+            return true;
+          }
+        } else
+        {
+          if (field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x-1, square[0].y+1) && field.isEmpty(square[0].x, square[0].y-1)   )
+          {
+            square[1] = new Square(square[0].x-1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x-1, square[0].y+1, chosenOne);
+            square[3] = new Square(square[0].x, square[0].y-1, chosenOne);
+            return true;
+          }
         }
       }
       break;
@@ -491,24 +515,48 @@ class Blocks
           return true;
         }
       }
-      if (numRot == 2)
+      if (numRot==2)
       {
-        if (field.isEmpty(square[0].x+1, square[0].y) && field.isEmpty(square[0].x, square[0].y+1) && field.isEmpty(square[0].x-1, square[0].y+1))
+        if (altRot)
         {
-          square[1] = new Square(square[0].x+1, square[0].y, chosenOne);
-          square[2] = new Square(square[0].x, square[0].y+1, chosenOne);
-          square[3] = new Square(square[0].x-1, square[0].y+1, chosenOne);
-          return true;
+          if (field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x, square[0].y-1) && field.isEmpty(square[0].x+1, square[0].y-1))
+          {
+            square[1] = new Square(square[0].x-1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x, square[0].y-1, chosenOne);
+            square[3] = new Square(square[0].x+1, square[0].y-1, chosenOne);
+            return true;
+          }
+        } else
+        {
+          if (field.isEmpty(square[0].x+1, square[0].y) && field.isEmpty(square[0].x, square[0].y+1) && field.isEmpty(square[0].x-1, square[0].y+1))
+          {
+            square[1] = new Square(square[0].x+1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x, square[0].y+1, chosenOne);
+            square[3] = new Square(square[0].x-1, square[0].y+1, chosenOne);
+            return true;
+          }
         }
       }
       if (numRot == 3)
       {
-        if (field.isEmpty(square[0].x-1, square[0].y-1) && field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x, square[0].y+1))
+        if (altRot)
         {
-          square[1] = new Square(square[0].x-1, square[0].y-1, chosenOne);
-          square[2] = new Square(square[0].x-1, square[0].y, chosenOne);
-          square[3] = new Square(square[0].x, square[0].y+1, chosenOne);
-          return true;
+          if (field.isEmpty(square[0].x+1, square[0].y) && field.isEmpty(square[0].x+1, square[0].y+1) && field.isEmpty(square[0].x, square[0].y-1))
+          {
+            square[1] = new Square(square[0].x+1, square[0].y, chosenOne);
+            square[2] = new Square(square[0].x+1, square[0].y+1, chosenOne);
+            square[3] = new Square(square[0].x, square[0].y-1, chosenOne);
+            return true;
+          }
+        } else
+        {
+          if (field.isEmpty(square[0].x-1, square[0].y-1) && field.isEmpty(square[0].x-1, square[0].y) && field.isEmpty(square[0].x, square[0].y+1))
+          {
+            square[1] = new Square(square[0].x-1, square[0].y-1, chosenOne);
+            square[2] = new Square(square[0].x-1, square[0].y, chosenOne);
+            square[3] = new Square(square[0].x, square[0].y+1, chosenOne);
+            return true;
+          }
         }
       }
       break;

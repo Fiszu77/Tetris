@@ -30,7 +30,8 @@ class Square
   {
     if (len>0) {
       rectMode(CENTER);
-      rect(x*var+0.5*var, y*var+0.5*var, len-var*0.1, len-var*0.1);
+       // rect(x*var+0.5*var, y*var+0.5*var, len-var*0.1, len-var*0.1);
+      rect(x*var+0.5*var, y*var+0.5*var, len-var, len-var);      
       recurect(len-var*0.1);
       rectMode(CORNER);
     }

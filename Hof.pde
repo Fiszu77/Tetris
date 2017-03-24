@@ -6,12 +6,26 @@ class Hof
   int highScore;
   Hof()
   {
-    String lines[] = loadStrings("scores.txt"); 
+    String lines[] = loadStrings("scores.txt");
+    try{
     for (int i = 0; i < lines.length; i++) 
     {
       table.add(int(lines[i]));
     }
     highScore = table.get(0);
+    }
+    catch(NullPointerException e)
+   {
+    createWriter("scores.txt"); 
+    }
+   catch(IndexOutOfBoundsException u)
+   {
+     for(int i = 0; i<5; i++)
+     {
+       table.add(0);
+       saveStrings("data/scores.txt", hofLines);
+     }
+   }
   }
   void saveScore(int score)
   {
