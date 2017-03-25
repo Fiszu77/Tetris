@@ -2,12 +2,12 @@ Field area;
 
 class Square
 {
-  PImage cactus;
-  int x = 5, y =5, falls = 0,posy = 0;
-  float alpha = 255; 
+  PImage cactus, flower;
+  int x = 5, y =5, falls = 0, posy = 0;
+  float alpha = 255, flowY=1; 
   color rgb = color(0), strokeRgb= color(0);
   int dead = 0;
-  boolean screen = false;
+  boolean screen = false, flowSpwn=false, flowMove=false;
 
   Square(int X, int Y, color Rgb)
   {
@@ -26,6 +26,7 @@ class Square
     if (Rgb==blue)
       cactus=loadImage("cacB.png");
 
+    flower =loadImage("flower.png");
     x = X;
     y=Y;
     posy=int(Y*var);
@@ -35,6 +36,7 @@ class Square
   }
   Square(int X, int Y, color Rgb, int al)
   {
+    flower =loadImage("flower.png");
     if (Rgb == red)
       cactus =loadImage("cacR.png");
     if (Rgb==green)
@@ -51,6 +53,7 @@ class Square
       cactus=loadImage("cacB.png");
     x = X;
     y=Y;
+    flowY=y;
     alpha = 0;
     rgb = Rgb;
     strokeRgb = Rgb;
@@ -71,7 +74,11 @@ class Square
 
     if (dead == 0)
     {
-
+      if (flowSpwn)
+      {
+        image(flower, x*var, flowY);
+        flowGrow();
+      }
       fill(rgb, alpha);
       if (screen)
       {
@@ -79,10 +86,10 @@ class Square
           stroke(strokeRgb);
           recurect(var+1);
         }
-      }else{
-      stroke(0);
-      image(cactus, x*var , y*var);
-      //rect(x*var, y*var, var, var);
+      } else {
+        stroke(0);
+        image(cactus, x*var, y*var);
+        //rect(x*var, y*var, var, var);
       }
     } 
     if (dead == 1)
@@ -91,7 +98,7 @@ class Square
       {
         stroke(strokeRgb, alpha);
         //fill(rgb, alpha);
-        tint(255,alpha);
+        tint(255, alpha);
         image(cactus, x*var, y*var);
         alpha-=10;
         noTint();
@@ -103,12 +110,20 @@ class Square
     {
       stroke(strokeRgb);
       fill(rgb);
+      if (flowSpwn)
+      {
+        if (flowMove)
+          image(flower, x*var, flowY=posy);
+        else
+          image(flower, x*var, flowY=posy-var);
+        //flowGrow();
+      }
       image(cactus, x*var, posy);
       if (posy<y*var)
         posy+=0.1*var;
       else
       {
-        settle();
+        area.settle(x, y);
         posy=int(y*var);
         dead=0;
       }
@@ -152,6 +167,8 @@ class Square
 
       area.move(x, y);
       y+=falls;
+      if (flowY>posy-var)
+        flowMove=true;
 
       dead = 2;
     }
@@ -164,13 +181,41 @@ class Square
       dead = 1;
       area.move(x, y);
     }
+    if (!area.isEmpty(x, y-1))
+    {
+      flowSpwn=false;
+    }
   }
 
   void settle()
   {
     area.settle(x, y);
+    posy=int(y*var);
+    flowSpwn();
   }
+  void flowSpwn()
+  {
+    if (area.isEmpty(x, y-1))
+    {
+      if (flowSpwn)
+        flowY=posy-var;
+      else
+        flowY=posy;
 
+      if (random(1)>0.75)
+        flowSpwn=true;
+    } else
+    {
+      flowSpwn = false;
+    }
+  }
+  void flowGrow()
+  {
+    if (flowY>posy-var)
+    {
+      flowY--;
+    }
+  }
   boolean isDownEmpty()
   {
     if (area.isEmpty(x, y+1))
