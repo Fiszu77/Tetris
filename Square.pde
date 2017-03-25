@@ -2,6 +2,7 @@ Field area;
 
 class Square
 {
+  PImage cactus;
   int x = 5, y =5, falls = 0;
   float posy = 0, alpha = 255; 
   color rgb = color(0), strokeRgb= color(0);
@@ -10,6 +11,21 @@ class Square
 
   Square(int X, int Y, color Rgb)
   {
+    if (Rgb == red)
+      cactus =loadImage("cacR.png");
+    if (Rgb==green)
+      cactus=loadImage("cacG.png");
+    if (Rgb==yellow)
+      cactus=loadImage("cacY.png");
+    if (Rgb==purple)
+      cactus=loadImage("cacP.png");
+    if (Rgb==orange)
+      cactus=loadImage("cacO.png");
+    if (Rgb==lightBlue)
+      cactus=loadImage("cacLb.png");
+    if (Rgb==blue)
+      cactus=loadImage("cacB.png");
+
     x = X;
     y=Y;
     posy=Y*var;
@@ -19,6 +35,20 @@ class Square
   }
   Square(int X, int Y, color Rgb, int al)
   {
+    if (Rgb == red)
+      cactus =loadImage("cacR.png");
+    if (Rgb==green)
+      cactus=loadImage("cacG.png");
+    if (Rgb==yellow)
+      cactus=loadImage("cacY.png");
+    if (Rgb==purple)
+      cactus=loadImage("cacP.png");
+    if (Rgb==orange)
+      cactus=loadImage("cacO.png");
+    if (Rgb==lightBlue)
+      cactus=loadImage("cacLb.png");
+    if (Rgb==blue)
+      cactus=loadImage("cacB.png");
     x = X;
     y=Y;
     alpha = 0;
@@ -30,7 +60,7 @@ class Square
   {
     if (len>0) {
       rectMode(CENTER);
-       // rect(x*var+0.5*var, y*var+0.5*var, len-var*0.1, len-var*0.1);
+      // rect(x*var+0.5*var, y*var+0.5*var, len-var*0.1, len-var*0.1);
       rect(x*var+0.5*var, y*var+0.5*var, len-var, len-var);      
       recurect(len-var*0.1);
       rectMode(CORNER);
@@ -51,17 +81,19 @@ class Square
         }
       }
       stroke(0);
-
-      rect(x*var, y*var, var, var);
+      image(cactus, x*var, y*var);
+      //rect(x*var, y*var, var, var);
     } 
     if (dead == 1)
     {
       if (alpha>10)
       {
         stroke(strokeRgb, alpha);
-        fill(rgb, alpha);
-        rect(x*var, y*var, var, var);
+        //fill(rgb, alpha);
+        tint(255, alpha);
+        image(cactus, x*var, y*var);
         alpha-=10;
+        noTint();
         if (alpha<=10)
           return 1;
       }
@@ -70,7 +102,7 @@ class Square
     {
       stroke(strokeRgb);
       fill(rgb);
-      rect(x*var, posy, var, var);
+      image(cactus, x*var, posy);
       if (posy<y*var)
         posy+=0.1*var;
       else
