@@ -276,7 +276,7 @@ class Blocks
       {
         for (int i =0; i<square.length; i++)
         {
-          square[i].x++;
+          square[i].goRight();
         }
         shBlocks.getDiv();
       }
@@ -287,7 +287,7 @@ class Blocks
       {
         for (int i =0; i<square.length; i++)
         {
-          square[i].x--;
+          square[i].goLeft();
         }
         shBlocks.getDiv();
       }

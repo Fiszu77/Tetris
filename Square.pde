@@ -2,12 +2,12 @@ Field area;
 
 class Square
 {
-  PImage cactus, flower;
+  PImage cactus, flower, lCac, rCac;
   int x = 5, y =5, falls = 0, posy = 0;
-  float alpha = 255, flowY=1; 
+  float alpha = 255, flowY=1, rCacX, lCacX; 
   color rgb = color(0), strokeRgb= color(0);
   int dead = 0;
-  boolean screen = false, flowSpwn=false, flowMove=false;
+  boolean screen = false, flowSpwn=false, flowMove=false, lcSpwn=false, rcSpwn=false;
 
   Square(int X, int Y, color Rgb)
   {
@@ -27,9 +27,13 @@ class Square
       cactus=loadImage("cacB.png");
 
     flower =loadImage("flower.png");
+    lCac = loadImage("lCac.png");
+    rCac = loadImage("rCac.png");
     x = X;
     y=Y;
     posy=int(Y*var);
+    rCacX=x*var;
+    lCacX=x*var;
     rgb = Rgb;
     strokeRgb = 0;
     area = new Field();
@@ -79,6 +83,16 @@ class Square
         image(flower, x*var, flowY);
         flowGrow();
       }
+      if (rcSpwn)
+      {
+        image(rCac, rCacX, y*var);
+        rcGrow();
+      }
+      if (lcSpwn)
+      {
+        image(lCac, lCacX, y*var);
+        lcGrow();
+      }
       fill(rgb, alpha);
       if (screen)
       {
@@ -110,6 +124,16 @@ class Square
     {
       stroke(strokeRgb);
       fill(rgb);
+      if (rcSpwn)
+      {
+        image(rCac, rCacX, posy);
+        rcGrow();
+      }
+      if (lcSpwn)
+      {
+        image(lCac, lCacX, posy);
+        lcGrow();
+      }
       if (flowSpwn)
       {
         if (flowMove)
@@ -185,6 +209,14 @@ class Square
     {
       flowSpwn=false;
     }
+    if (!area.isEmpty(x+1, y))
+    {
+      rcSpwn=false;
+    }
+    if (!area.isEmpty(x-1, y))
+    {
+      lcSpwn=false;
+    }
   }
 
   void settle()
@@ -192,6 +224,20 @@ class Square
     area.settle(x, y);
     posy=int(y*var);
     flowSpwn();
+    cacSpwn();
+  }
+  void cacSpwn()
+  {
+    if (area.isEmpty(x+1, y))
+    {
+      if (random(1)>0.90)
+        rcSpwn=true;
+    }
+    if (area.isEmpty(x-1, y))
+    {
+      if (random(1)>0.90)
+        lcSpwn=true;
+    }
   }
   void flowSpwn()
   {
@@ -209,12 +255,38 @@ class Square
       flowSpwn = false;
     }
   }
+  void rcGrow()
+  {
+    if (rCacX<x*var+var)
+    {
+      rCacX++;
+    }
+  }
+  void lcGrow()
+  {
+    if (lCacX>x*var-var)
+    {
+      lCacX--;
+    }
+  }
   void flowGrow()
   {
     if (flowY>posy-var)
     {
       flowY--;
     }
+  }
+  void goRight()
+  {
+    x++;
+    rCacX=x*var;
+    lCacX=x*var;
+  }
+  void goLeft()
+  {
+    x--;
+    rCacX=x*var;
+    lCacX=x*var;
   }
   boolean isDownEmpty()
   {
