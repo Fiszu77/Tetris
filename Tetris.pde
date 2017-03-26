@@ -192,7 +192,7 @@ void draw()
     fill(255);
     textFont(pixFont20);
     textAlign(CENTER);
-    text("Programmed by\nFilip Szewczyk\n\n,,Simpixle'' font by\nJakub Niewiarowski", width/2, 5*var);
+    text("Programmed by\nFilip Szewczyk\n\nFont and artwork by\nJakub Niewiarowski", width/2, 5*var);
     textAlign(LEFT);
     if (retButton.show(allButtons))
       mode=0;

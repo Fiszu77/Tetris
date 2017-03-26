@@ -4,7 +4,7 @@ class Square
 {
   PImage cactus, flower, lCac, rCac;
   int x = 5, y =5, falls = 0, posy = 0;
-  float alpha = 255, flowY=1, rCacX, lCacX; 
+  float alpha = 255, flowY=1, rCacX, lCacX,a=0; 
   color rgb = color(0), strokeRgb= color(0);
   int dead = 0;
   boolean screen = false, flowSpwn=false, flowMove=false, lcSpwn=false, rcSpwn=false;
@@ -13,8 +13,10 @@ class Square
   {
     if (Rgb == red)
       cactus =loadImage("cacR.png");
-    if (Rgb==green)
+    if (Rgb==green){
       cactus=loadImage("cacG.png");
+      cactus.resize(30,30);
+    }
     if (Rgb==yellow)
       cactus=loadImage("cacY.png");
     if (Rgb==purple)
@@ -144,13 +146,20 @@ class Square
       }
       image(cactus, x*var, posy);
       if (posy<y*var)
-        posy+=0.1*var;
+      {
+        if(y*var-posy<5)
+        posy+=1;
+        else
+        posy+=round(tan(a)*10.0)/10.0;
+      }
       else
       {
         area.settle(x, y);
         posy=int(y*var);
         dead=0;
       }
+      if(a<PI/2.2)
+        a+=PI/70;
     }
     return 0;
   }
@@ -193,7 +202,7 @@ class Square
       y+=falls;
       if (flowY>posy-var)
         flowMove=true;
-
+      a=0;
       dead = 2;
     }
   }
