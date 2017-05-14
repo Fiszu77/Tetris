@@ -31,8 +31,8 @@ class Play
     gameOver= false;
     agdv = false;
     pause = false;
-    resumePress = new Button(float(width)/2, 15*var, blue, "Resume", 10*varInt);
-    restartPress =  new Button(float(width)/2, 19*var, yellow, "Menu", 10*varInt);
+    resumePress = new Button(float(width)/2, 15*var, blue, "Resume", 10*var);
+    restartPress =  new Button(float(width)/2, 19*var, yellow, "Menu", 10*var);
     guPress =  new Button(float(width)/2, 18*var, red, "GiveUp");
     allButts = new Button[3];
     allButts[0] = resumePress;
@@ -45,6 +45,7 @@ class Play
     level = new Level();
     points = new Score();    
     toBlur.loadPixels();
+    back.resize(int(var*10),int(var*20));
     shp = prediction.getShape();
     block[0] = new Blocks(shp + 1, 0);
 
@@ -149,6 +150,7 @@ class Play
       ile = bCount;
       fill(150);
       textFont(pixFont10);
+      textSize(29*var/30);
       textAlign(RIGHT);
       text("CACTUSOFT", width-3, height+9.3*var);
       text("ENTERTAINMENT©", width-3, height+10*var-0.06*var);
@@ -183,6 +185,7 @@ class Play
         rect(width/2-5*var, height/2+3.5*var, 10*var, 7*var, 7);
         fill(0);
         textFont(pixFontMX);
+        textSize(100*var/30);
         textAlign(CENTER);
         text("PAUSE", width/2, height/2+7.5*var);
 

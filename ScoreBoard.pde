@@ -9,6 +9,7 @@ class ScoreBoard
   {
     fill(255);
     textFont(pixFont);
+    textSize(70*var/30);
     try {
       text("1.", width/2-3*var, height/2-5*var);
       text(table.table.get(0), width/2-1*var, height/2-5*var);

@@ -12,6 +12,7 @@ PFont pixFont;
 PFont pixFont20;
 PFont pixFont10;
 PFont pixFontMX;
+PImage cacY,cacO,cacG,cacR,cacLb,cacP,cacB, flower, lCac, rCac;
 Button gButton, rButton, bButton, linkButton, retButton, shadowButton, altRotButton;
 Play play;
 Desktop d;
@@ -23,6 +24,17 @@ public static float var =0;
 String settings[];
 void setup()
 { 
+  cacY = loadImage("cacY.png");
+  cacB = loadImage("cacB.png");
+  cacLb = loadImage("cacLb.png");
+  cacP= loadImage("cacP.png");
+  cacO = loadImage("cacO.png");
+  cacG = loadImage("cacG.png");
+  flower =loadImage("flower.png");
+    lCac = loadImage("lCac.png");
+    rCac = loadImage("rCac.png");
+    
+  PImage cactusss =loadImage("icon.png");
   settings = loadStrings("settings.txt");
   try 
   {
@@ -41,9 +53,19 @@ void setup()
     saveStrings("data/settings.txt", settings);
   }
   d = Desktop.getDesktop();
-  size(540, 720);
+  size(520, 740);
   var=int(height/24);
   frameRate(60);
+  cacY.resize(int(var),int(var));
+  cacB.resize(int(var),int(var));
+  cacLb.resize(int(var),int(var));
+  cacP.resize(int(var),int(var));
+  cacO.resize(int(var),int(var));
+  cacG.resize(int(var),int(var));
+  flower.resize(int(var),int(var));
+    lCac.resize(int(var),int(var));
+    rCac.resize(int(var),int(var));
+   surface.setIcon(cactusss);
   gButton = new Button(float(width)/2, 7*var, green, "Play");
   rButton = new Button(float(width)/2, 10*var, red, "Scores");
   bButton = new Button(float(width)/2, 13*var, blue, "Credits");
@@ -65,9 +87,6 @@ void setup()
   pixFont20 = createFont("Simpixle.ttf", 60);
   pixFont10 = createFont("Simpixle.ttf", 29);
   pixFontMX = createFont("Simpixle.ttf", 100);
-  //pixFont = createFont("pixelFont.TTF",30);
-  //pixFont20 = createFont("pixelFont.TTF",20);
-  // pixFont10 = createFont("pixelFont.TTF",10);
 }
 
 void draw()
@@ -79,6 +98,7 @@ void draw()
     textAlign(LEFT);
     fill(150);
     textFont(pixFont10);
+    textSize(29*var/30);
     text("S or UP - rotate right\nA - rotate left\nLEFT and RIGHT - move a block\nDOWN - soft drop\nSPACE - hard drop\nESCAPE - pause game", width/2 - 3*var, height/2+4*var);
 
     if (linkButton.show(allButtons))
@@ -134,6 +154,7 @@ void draw()
     fill(150);
     textFont(pixFont10);
     textAlign(RIGHT);
+    textSize(29*var/30);
     text("alt. rotations", width-0*var, 11.9*var);
     if (altRot)
       text("ON", width-2.2*var, 12.5*var);
@@ -149,6 +170,7 @@ void draw()
     fill(150);
     textFont(pixFont10);
     textAlign(RIGHT);
+    textSize(29*var/30);
     text("CACTUSOFT", width-3, height-0.7*var);
     text("ENTERTAINMENT©", width-3, height-0.06*var);
     textAlign(LEFT);
@@ -192,6 +214,7 @@ void draw()
     fill(255);
     textFont(pixFont20);
     textAlign(CENTER);
+    textSize(60*var/30);
     text("Programmed by\nFilip Szewczyk\n\nFont and artwork by\nJakub Niewiarowski", width/2, 5*var);
     textAlign(LEFT);
     if (retButton.show(allButtons))

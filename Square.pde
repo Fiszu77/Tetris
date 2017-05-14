@@ -2,7 +2,7 @@ Field area;
 
 class Square
 {
-  PImage cactus, flower, lCac, rCac;
+  PImage cactus;
   int x = 5, y =5, falls = 0, posy = 0;
   float alpha = 255, flowY=1, rCacX, lCacX,a=0; 
   color rgb = color(0), strokeRgb= color(0);
@@ -15,22 +15,19 @@ class Square
       cactus =loadImage("cacR.png");
     if (Rgb==green){
       cactus=loadImage("cacG.png");
-      cactus.resize(30,30);
+      
     }
     if (Rgb==yellow)
-      cactus=loadImage("cacY.png");
+      cactus=cacY;
     if (Rgb==purple)
-      cactus=loadImage("cacP.png");
+      cactus=cacP;
     if (Rgb==orange)
-      cactus=loadImage("cacO.png");
+      cactus=cacO;
     if (Rgb==lightBlue)
-      cactus=loadImage("cacLb.png");
+      cactus=cacLb;
     if (Rgb==blue)
-      cactus=loadImage("cacB.png");
-
-    flower =loadImage("flower.png");
-    lCac = loadImage("lCac.png");
-    rCac = loadImage("rCac.png");
+      cactus=cacB;
+    
     x = X;
     y=Y;
     posy=int(Y*var);
@@ -158,8 +155,8 @@ class Square
         posy=int(y*var);
         dead=0;
       }
-      if(a<PI/2.2)
-        a+=PI/70;
+      if(a<PI/2.16)
+        a+=PI/80;
     }
     return 0;
   }
@@ -239,12 +236,12 @@ class Square
   {
     if (area.isEmpty(x+1, y))
     {
-      if (random(1)>0.90)
+      if (random(1)>0.85)
         rcSpwn=true;
     }
     if (area.isEmpty(x-1, y))
     {
-      if (random(1)>0.90)
+      if (random(1)>0.85)
         lcSpwn=true;
     }
   }

@@ -140,12 +140,12 @@ class Button
     fill(0);
     textFont(pixFontMX);
     textAlign(CENTER);
-    txtSize = ((modWid/rectWid)*100);
+    txtSize = ((modWid/rectWid)*100)*var/30;
     if (active)
-      txtSize = ((exRectWid/rectWid)*100);
+      txtSize = ((exRectWid/rectWid)*100)*var/30;
 
     textSize(txtSize-15);
-    text(onButt, posx, posy+0.6*var);
+    text(onButt, posx, posy+0.5*var);
     
     rectMode(CORNER);
     return false;
