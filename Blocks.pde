@@ -9,12 +9,14 @@ class Blocks
   public color orange = color(255, 102, 0), purple = color(122, 55, 139), red = color(205, 0, 0), chosenOne= color(0), blue = color(0, 7, 205), 
     green = color(50, 180, 10), yellow = color(245, 211, 0), lightBlue = color(0, 188, 255);
   Square[] square = new Square[4];
+  Timer leftTimer = new Timer();
+  Timer rightTimer = new Timer();
   ShBlocks shBlocks;
   Graveyard graveyard = new Graveyard();
   private int shape, previous = 0, ID = 0, deadCount = 0;
-  float speed = 0.6, time = 500;
+  float speed = 0.6, time = 500, moveTime = 80;
   float bottom;
-  boolean born = true, settled = false, turned1 = false, turned2 = false, moving = false;
+  boolean born = true, settled = false, turned1 = false, turned2 = false, moving = false, firstLeft = true, firstRight = true;
   int x = 4, y = 8, numRot = 0;
   Blocks(int blockType, int blockNumber)
   {
@@ -270,27 +272,59 @@ class Blocks
       }
       shBlocks.getDiv();
     }
-    if (right)
+    if (right && !left)
     {
       if (square[0].isRightEmpty() && square[1].isRightEmpty() && square[2].isRightEmpty() && square[3].isRightEmpty())
       {
-        for (int i =0; i<square.length; i++)
+        
+        if (rightTimer.wait(moveTime) || firstRight)
         {
-          square[i].goRight();
+          rightTimer.getTime();
+          
+          for (int i =0; i<square.length; i++)
+          {
+            square[i].goRight();
+          }
+          shBlocks.getDiv();
+          if (firstRight)      
+        {
+          moveTime = 140;
+        }else
+          moveTime = 50;
+          
+          firstRight = false;
         }
-        shBlocks.getDiv();
       }
+    } else
+    {
+      firstRight = true;
     }
-    if (left)
+    if (left && !right)
     {
       if (square[0].isLeftEmpty() && square[1].isLeftEmpty() && square[2].isLeftEmpty() && square[3].isLeftEmpty())
       {
-        for (int i =0; i<square.length; i++)
+        
+        if (leftTimer.wait(moveTime) || firstLeft)
         {
-          square[i].goLeft();
+          leftTimer.getTime();
+          
+          for (int i =0; i<square.length; i++)
+          {
+            square[i].goLeft();
+          }
+          shBlocks.getDiv();
+          if (firstLeft)
+        {
+          moveTime = 140;
+        }else
+          moveTime = 50;
+          
+          firstLeft = false;
         }
-        shBlocks.getDiv();
       }
+    } else
+    {
+      firstLeft = true;
     }
   }
   void setPermission(boolean permission)

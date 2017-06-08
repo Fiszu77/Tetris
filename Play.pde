@@ -14,7 +14,7 @@ class Play
   Blocks[] block = new Blocks[400];
   int newBlock = 0, shp, varInt=0;
   int bCount=1, ile=1, resOne =0;
-  boolean gameOver;
+  boolean gameOver, twoPressed=false;
   int[] kill = new int[4];
   PImage toBlur = createImage(width, height, RGB);
   PImage matrix = createImage(int(10*var), int(20*var), RGB);
@@ -45,7 +45,7 @@ class Play
     level = new Level();
     points = new Score();    
     toBlur.loadPixels();
-    back.resize(int(var*10),int(var*20));
+    back.resize(int(var*10), int(var*20));
     shp = prediction.getShape();
     block[0] = new Blocks(shp + 1, 0);
 
@@ -60,6 +60,7 @@ class Play
         matrix.pixels[i]=color(0);
     }
   }
+
   void playTetris()
   {
     background(0);
@@ -67,12 +68,13 @@ class Play
     translate(0, -10*var);
     rect(0, 10*var, 10*var, 20*var);
     image(back, 0, 10*var);
-    if(noShadow)
-    image(matrix, 0, 10*var+2);
+    if (noShadow)
+      image(matrix, 0, 10*var+2);
     
-
-
-
+    if (keyPressed )
+    {
+      setMove(keyCode, true);
+    }
     bCount = 1;
 
     if (grid.getGameOver()==false && pause == false)
@@ -155,8 +157,6 @@ class Play
       text("CACTUSOFT", width-3, height+9.3*var);
       text("ENTERTAINMENT©", width-3, height+10*var-0.06*var);
       textAlign(LEFT);
-      prawo=false;
-      lewo=false;
       hardDrop = false;
       obrotPrawo=false;
       obrotLewo = false;
@@ -247,13 +247,21 @@ class Play
     }
   }
 }
+
+boolean setMove(int k, boolean b)
+{
+  switch(k)
+  {
+  case LEFT:
+    return lewo = b;
+  case RIGHT:
+    return prawo = b;
+  }
+  return b;
+}
 void keyPressed()
 {
-  if (keyCode == RIGHT)
-    prawo=true;
 
-  if (keyCode == LEFT)
-    lewo=true;
 
   if (keyCode == ESC) {
     key='p';
@@ -279,6 +287,8 @@ void keyPressed()
 }
 void keyReleased()
 {
+  //println(keyCode);
+  setMove(keyCode, false);
   if (keyCode == DOWN)
     szybko = false;
 }

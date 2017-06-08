@@ -12,7 +12,7 @@ PFont pixFont;
 PFont pixFont20;
 PFont pixFont10;
 PFont pixFontMX;
-PImage cacY,cacO,cacG,cacR,cacLb,cacP,cacB, flower, lCac, rCac;
+PImage cacY, cacO, cacG, cacR, cacLb, cacP, cacB, flower, lCac, rCac;
 Button gButton, rButton, bButton, linkButton, retButton, shadowButton, altRotButton;
 Play play;
 Desktop d;
@@ -24,6 +24,7 @@ public static float var =0;
 String settings[];
 void setup()
 { 
+  surface.setTitle("Tetris 1.3");
   cacY = loadImage("cacY.png");
   cacB = loadImage("cacB.png");
   cacLb = loadImage("cacLb.png");
@@ -31,9 +32,9 @@ void setup()
   cacO = loadImage("cacO.png");
   cacG = loadImage("cacG.png");
   flower =loadImage("flower.png");
-    lCac = loadImage("lCac.png");
-    rCac = loadImage("rCac.png");
-    
+  lCac = loadImage("lCac.png");
+  rCac = loadImage("rCac.png");
+
   PImage cactusss =loadImage("icon.png");
   settings = loadStrings("settings.txt");
   try 
@@ -56,16 +57,16 @@ void setup()
   size(520, 740);
   var=int(height/24);
   frameRate(60);
-  cacY.resize(int(var),int(var));
-  cacB.resize(int(var),int(var));
-  cacLb.resize(int(var),int(var));
-  cacP.resize(int(var),int(var));
-  cacO.resize(int(var),int(var));
-  cacG.resize(int(var),int(var));
-  flower.resize(int(var),int(var));
-    lCac.resize(int(var),int(var));
-    rCac.resize(int(var),int(var));
-   surface.setIcon(cactusss);
+  cacY.resize(int(var), int(var));
+  cacB.resize(int(var), int(var));
+  cacLb.resize(int(var), int(var));
+  cacP.resize(int(var), int(var));
+  cacO.resize(int(var), int(var));
+  cacG.resize(int(var), int(var));
+  flower.resize(int(var), int(var));
+  lCac.resize(int(var), int(var));
+  rCac.resize(int(var), int(var));
+  surface.setIcon(cactusss);
   gButton = new Button(float(width)/2, 7*var, green, "Play");
   rButton = new Button(float(width)/2, 10*var, red, "Scores");
   bButton = new Button(float(width)/2, 13*var, blue, "Credits");
@@ -120,7 +121,7 @@ void draw()
       noShadow = !noShadow;
       try
       {
-      settings[0] = String.valueOf(noShadow);
+        settings[0] = String.valueOf(noShadow);
       }
       catch(NullPointerException e)
       {
@@ -133,7 +134,7 @@ void draw()
       altRot = !altRot;
       try
       {
-      settings[1] = String.valueOf(altRot);
+        settings[1] = String.valueOf(altRot);
       }
       catch(NullPointerException e)
       {
