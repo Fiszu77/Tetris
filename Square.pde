@@ -12,11 +12,9 @@ class Square
   Square(int X, int Y, color Rgb)
   {
     if (Rgb == red)
-      cactus =loadImage("cacR.png");
-    if (Rgb==green){
-      cactus=loadImage("cacG.png");
-      
-    }
+      cactus =cacR;
+    if (Rgb==green)
+      cactus=cacG;
     if (Rgb==yellow)
       cactus=cacY;
     if (Rgb==purple)
@@ -39,21 +37,20 @@ class Square
   }
   Square(int X, int Y, color Rgb, int al)
   {
-    flower =loadImage("flower.png");
     if (Rgb == red)
-      cactus =loadImage("cacR.png");
+      cactus =cacR;
     if (Rgb==green)
-      cactus=loadImage("cacG.png");
+      cactus=cacG;
     if (Rgb==yellow)
-      cactus=loadImage("cacY.png");
+      cactus=cacY;
     if (Rgb==purple)
-      cactus=loadImage("cacP.png");
+      cactus=cacP;
     if (Rgb==orange)
-      cactus=loadImage("cacO.png");
+      cactus=cacO;
     if (Rgb==lightBlue)
-      cactus=loadImage("cacLb.png");
+      cactus=cacLb;
     if (Rgb==blue)
-      cactus=loadImage("cacB.png");
+      cactus=cacB;
     x = X;
     y=Y;
     flowY=y;

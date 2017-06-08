@@ -31,6 +31,7 @@ void setup()
   cacP= loadImage("cacP.png");
   cacO = loadImage("cacO.png");
   cacG = loadImage("cacG.png");
+  cacR = loadImage("cacR.png");
   flower =loadImage("flower.png");
   lCac = loadImage("lCac.png");
   rCac = loadImage("rCac.png");
@@ -54,9 +55,10 @@ void setup()
     saveStrings("data/settings.txt", settings);
   }
   d = Desktop.getDesktop();
-  size(520, 740);
+  size(540, 720);
   var=int(height/24);
   frameRate(60);
+  cacR.resize(int(var), int(var));
   cacY.resize(int(var), int(var));
   cacB.resize(int(var), int(var));
   cacLb.resize(int(var), int(var));
